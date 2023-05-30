@@ -31,7 +31,7 @@ const ModelViewer = () => {
     const loader = new GLTFLoader();
     loader.load(modelPath, (gltf) => {
       const model = gltf.scene;
-      model.scale.set(0.1, 0.1, 0.1)
+      model.scale.set(0.5, 0.5, 0.5)
       scene.add(model);
       setModelLoaded(true)
     });

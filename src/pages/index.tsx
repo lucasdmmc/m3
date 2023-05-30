@@ -14,8 +14,8 @@ const IndexPage: React.FC<PageProps> = () => {
       </div> */}
       <div style={{ 
         WebkitOverflowScrolling: "touch",
-        overflowX: "hidden",
-        height: "100vh",
+        overflow: "hidden",
+        height: "500px",
        }}  className="max-w-full overflow-x-hidden flex justify-center items-center">
         <ModelViewer />
       </div>
