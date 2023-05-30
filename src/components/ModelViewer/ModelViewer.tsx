@@ -22,12 +22,12 @@ const ModelViewer = () => {
       1000
     );
     const renderer = new THREE.WebGLRenderer();
-    renderer.setClearColor(0xffffff);
+    renderer.setClearColor(0xffffff); // Define o fundo como branco
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.update();
+    controls.enableZoom = false; // Desabilita o zoom
 
     const loader = new GLTFLoader();
     loader.load(modelPath, (gltf) => {
@@ -47,19 +47,44 @@ const ModelViewer = () => {
 
     camera.position.z = 5;
 
+    const handleScroll = (event: { preventDefault: () => void; }) => {
+      event.preventDefault();
+    };
+
+    const handleTouchMove = (event: { preventDefault: () => void; }) => {
+      event.preventDefault();
+    };
+
+    const enableControls = () => {
+      controls.enabled = true;
+    };
+
+    const disableControls = () => {
+      controls.enabled = false;
+    };
+
     const animate = () => {
       if (!isMounted) return;
       requestAnimationFrame(animate);
-      controls.update(); // Atualiza os controles de órbita
+      // controls.update(); // Comentado para desabilitar o controle de zoom
       renderer.render(scene, camera);
     };
 
     animate();
 
+    renderer.domElement.addEventListener("wheel", handleScroll, { passive: false });
+    renderer.domElement.addEventListener("touchmove", handleTouchMove, { passive: false });
+    renderer.domElement.addEventListener("touchstart", disableControls);
+    renderer.domElement.addEventListener("touchend", enableControls);
+
     return () => {
       isMounted = false;
+      renderer.domElement.removeEventListener("wheel", handleScroll);
+      renderer.domElement.removeEventListener("touchmove", handleTouchMove);
+      renderer.domElement.removeEventListener("touchstart", disableControls);
+      renderer.domElement.removeEventListener("touchend", enableControls);
     };
-  }, []); // Array vazio como segundo argumento
+  }, []);
 
   return <div ref={mountRef} />;
 };
