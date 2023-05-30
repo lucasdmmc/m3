@@ -1,0 +1,11 @@
+Model Information:
+* title:	Logo
+* source:	https://sketchfab.com/3d-models/logo-9df0a52a7a214c0bb9a6621f22416264
+* author:	lucas.dmmcar (https://sketchfab.com/lucas.dmmcar)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Logo" (https://sketchfab.com/3d-models/logo-9df0a52a7a214c0bb9a6621f22416264) by lucas.dmmcar (https://sketchfab.com/lucas.dmmcar) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

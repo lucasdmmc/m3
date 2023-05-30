@@ -1,12 +1,3 @@
 node_modules/
 .cache/
 src/gatsby-types.d.ts
-
-# Ignorar a pasta public
-public/
-
-# Não ignorar os arquivos e pasta específicos dentro da pasta public
-!public/scene.bin
-!public/scene.gltf
-!public/license.txt
-!public/textures/
