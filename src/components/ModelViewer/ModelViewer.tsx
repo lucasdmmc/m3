@@ -9,7 +9,7 @@ const ModelViewer = () => {
   useEffect(() => {
     let isMounted = true;
     const modelPath =
-      "scene.gltf";
+      "/scene.gltf";
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
