@@ -47,7 +47,7 @@ const ModelViewer = () => {
     directionalLight2.position.set(-100, 200, -100);
     scene.add(directionalLight2);
 
-    camera.position.z = 500;
+    camera.position.z = 5;
 
     const handleResize = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);

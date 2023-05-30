@@ -12,7 +12,11 @@ const IndexPage: React.FC<PageProps> = () => {
       {/* <div className="flex justify-center">
         <img src={home} alt="" />
       </div> */}
-      <div className="max-w-full overflow-x-hidden flex justify-center items-center">
+      <div style={{ 
+        WebkitOverflowScrolling: "touch",
+        overflowX: "hidden",
+        height: "100vh",
+       }}  className="max-w-full overflow-x-hidden flex justify-center items-center">
         <ModelViewer />
       </div>
       <div className="flex flex-col gap-9 bg-zinc-900 pb-10 sm:pb-4 md:h-[600px]">
