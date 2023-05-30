@@ -9,7 +9,7 @@ const ModelViewer = () => {
   useEffect(() => {
     let isMounted = true;
     const modelPath =
-      "https://raw.githubusercontent.com/dwqdaiwenqi/react-3d-viewer/master/site/src/lib/model/DamagedHelmet.gltf";
+      "scene.gltf";
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -30,8 +30,6 @@ const ModelViewer = () => {
     const loader = new GLTFLoader();
     loader.load(modelPath, (gltf) => {
       const model = gltf.scene;
-      const scale = window.innerWidth < 640 ? 0.3 : 1;
-      model.scale.set(scale, scale, scale);
       scene.add(model);
     });
 
@@ -42,11 +40,8 @@ const ModelViewer = () => {
     directionalLight1.position.set(100, 200, 100);
     scene.add(directionalLight1);
 
-    const directionalLight2 = new THREE.DirectionalLight(0xff00ff);
-    directionalLight2.position.set(-100, 200, -100);
-    scene.add(directionalLight2);
+    camera.position.z = window.innerWidth < 640 ? 3 : 0.7;
 
-    camera.position.z = 5;
 
     const handleResize = () => {
       renderer.setSize(1200, 1200 * (window.innerHeight / window.innerWidth));
