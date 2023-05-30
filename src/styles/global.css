@@ -4,6 +4,8 @@
 
 
 body {
-  background: white;
+  background: #121214;
   font-family: "Open Sans", sans-serif;
+  position: relative;
+  overflow-x: hidden;
 }

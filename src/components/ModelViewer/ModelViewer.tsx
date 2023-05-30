@@ -21,9 +21,10 @@ const ModelViewer = () => {
       0.1,
       1000
     );
+
     const renderer = new THREE.WebGLRenderer();
     renderer.setClearColor(0xffffff); // Define o fundo como branco
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(1200, 1200 * (window.innerHeight / window.innerWidth));
     mountRef.current.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -47,46 +48,54 @@ const ModelViewer = () => {
 
     camera.position.z = 5;
 
-    const handleScroll = (event: { preventDefault: () => void; }) => {
-      event.preventDefault();
-    };
+    // const handleScroll = (event: { preventDefault: () => void; }) => {
+    //   event.preventDefault();
+    // };
 
-    const handleTouchMove = (event: { preventDefault: () => void; }) => {
-      event.preventDefault();
-    };
+    // const handleTouchMove = (event: { preventDefault: () => void; }) => {
+    //   event.preventDefault();
+    // };
 
-    const enableControls = () => {
-      controls.enabled = true;
-    };
+    // const enableControls = () => {
+    //   controls.enabled = true;
+    // };
 
-    const disableControls = () => {
-      controls.enabled = false;
-    };
+    // const disableControls = () => {
+    //   controls.enabled = false;
+    // };
+
+    // const handleWheel = (event: { target: HTMLCanvasElement; stopPropagation: () => void; }) => {
+    //   if (event.target === renderer.domElement) {
+    //     event.stopPropagation();
+    //   }
+    // };
 
     const animate = () => {
       if (!isMounted) return;
       requestAnimationFrame(animate);
-      // controls.update(); // Comentado para desabilitar o controle de zoom
+      controls.update(); // Comentado para desabilitar o controle de zoom
       renderer.render(scene, camera);
     };
 
     animate();
 
-    renderer.domElement.addEventListener("wheel", handleScroll, { passive: false });
-    renderer.domElement.addEventListener("touchmove", handleTouchMove, { passive: false });
-    renderer.domElement.addEventListener("touchstart", disableControls);
-    renderer.domElement.addEventListener("touchend", enableControls);
+    // window.addEventListener("wheel", handleWheel, { passive: false });
+    // renderer.domElement.addEventListener("wheel", handleScroll, { passive: false });
+    // renderer.domElement.addEventListener("touchmove", handleTouchMove, { passive: false });
+    // renderer.domElement.addEventListener("touchstart", disableControls);
+    // renderer.domElement.addEventListener("touchend", enableControls);
 
     return () => {
       isMounted = false;
-      renderer.domElement.removeEventListener("wheel", handleScroll);
-      renderer.domElement.removeEventListener("touchmove", handleTouchMove);
-      renderer.domElement.removeEventListener("touchstart", disableControls);
-      renderer.domElement.removeEventListener("touchend", enableControls);
+      // renderer.domElement.removeEventListener("wheel", handleScroll);
+      // renderer.domElement.removeEventListener("touchmove", handleTouchMove);
+      // renderer.domElement.removeEventListener("touchstart", disableControls);
+      // renderer.domElement.removeEventListener("touchend", enableControls);
+      // window.removeEventListener("wheel", handleWheel);
     };
   }, []);
 
-  return <div ref={mountRef} />;
+  return <div ref={mountRef}/>;
 };
 
 export default ModelViewer;
