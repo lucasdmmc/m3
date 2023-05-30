@@ -32,7 +32,9 @@ const ModelViewer = () => {
 
     const loader = new GLTFLoader();
     loader.load(modelPath, (gltf) => {
-      scene.add(gltf.scene);
+      const model = gltf.scene
+      model.scale.set(0.3, 0.3, 0.3);
+      scene.add(model);
     });
 
     const ambientLight = new THREE.AmbientLight(0xffffff);

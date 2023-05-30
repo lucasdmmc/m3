@@ -33,10 +33,10 @@ const IndexPage: React.FC<PageProps> = () => {
           and don't oppress each-other with outdated narratives.
         </span>
       </div>
-      <div className="h-56 md:h-[500px] w-full flex justify-center items-center bg-zinc-900 px-5">
+      <div className=" border border-zinc-600 h-56 md:h-[500px] w-full flex justify-center items-center bg-zinc-900 px-5">
         <Envelope size={300} weight="thin" className="w-40 sm:w-52 md:w-full text-zinc-500" />
       </div>
-      <div className="p-10 w-full bg-zinc-900 flex items-center justify-center">
+      <div className=" border-x border-b border-zinc-600 p-10 w-full bg-zinc-900 flex items-center justify-center">
         <img src={m3Footer} alt="" />
       </div>
     </main>
