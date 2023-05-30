@@ -16,8 +16,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@react-spring/three": "^9.7.2",
     "@react-three/drei": "^9.70.0",
     "@react-three/fiber": "^8.13.0",
+    "drei": "^2.2.21",
     "gatsby": "^5.10.0",
     "gatsby-omni-font-loader": "^2.0.2",
     "gltfjsx": "^6.2.3",
@@ -28,7 +30,8 @@
     "react-helmet": "^6.1.0",
     "react-model-viewer": "^0.6.1",
     "react-three-fiber": "^6.0.13",
-    "three": "^0.152.2"
+    "three": "^0.152.2",
+    "three-orbitcontrols": "^2.110.3"
   },
   "devDependencies": {
     "@types/node": "^18.16.13",

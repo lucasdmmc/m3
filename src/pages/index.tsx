@@ -1,28 +1,20 @@
 import { HeadFC, PageProps } from "gatsby"
-import React from "react"
+import React, { useEffect } from "react"
 import metaverse from "../images/m3-metaverse.png"
 import m3Footer from "../images/m3-footer.png"
-import home from "../images/home.png"
 import { Envelope } from "phosphor-react"
-import { ModelViewer } from "../components/ModelViewer"
-
-
-
+import ModelViewer from "../components/ModelViewer/ModelViewer"
+import { Canvas } from "@react-three/fiber"
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <main className="bg-white flex flex-col justify-center items-center max-w-[1200px] border border-zinc-500 mx-auto">
-      {/* <Helmet>
-        <script src="https://cdn.rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
-      </Helmet>
-      <ThreeM /> */}
-      {/* <M3 /> */}
+    <main className="relative bg-white flex flex-col justify-center items-center max-w-[1200px] border border-zinc-500 mx-auto">
       {/* <div className="flex justify-center">
         <img src={home} alt="" />
       </div> */}
-
-      <ModelViewer
-      />
+      <div>
+        <ModelViewer />
+      </div>
       <div className="flex flex-col gap-9 bg-zinc-900 pb-10 sm:pb-4 md:h-[600px]">
         <img className="mt-10" src={metaverse} alt="" />
 
