@@ -8,11 +8,11 @@ import { Canvas } from "@react-three/fiber"
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <main className="bg-white flex flex-col justify-center items-center max-w-[1200px] mx-auto">
+    <main className="relative bg-white flex flex-col justify-center items-center max-w-[1200px] mx-auto">
       {/* <div className="flex justify-center">
         <img src={home} alt="" />
       </div> */}
-      <div className=" max-h-[500px] flex justify-center items-center">
+      <div className="max-w-full overflow-x-hidden flex justify-center items-center">
         <ModelViewer />
       </div>
       <div className="flex flex-col gap-9 bg-zinc-900 pb-10 sm:pb-4 md:h-[600px]">

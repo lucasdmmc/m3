@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const ModelViewer = () => {
   const mountRef = useRef(null);
+  const [modelLoaded, setModelLoaded] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -12,9 +13,6 @@ const ModelViewer = () => {
       "https://raw.githubusercontent.com/dwqdaiwenqi/react-3d-viewer/master/site/src/lib/model/DamagedHelmet.gltf";
 
     const scene = new THREE.Scene();
-    if (scene === null) {
-      return scene;
-    }
     const camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
@@ -32,7 +30,10 @@ const ModelViewer = () => {
 
     const loader = new GLTFLoader();
     loader.load(modelPath, (gltf) => {
-      scene.add(gltf.scene);
+      const model = gltf.scene;
+      model.scale.set(0.1, 0.1, 0.1)
+      scene.add(model);
+      setModelLoaded(true)
     });
 
     const ambientLight = new THREE.AmbientLight(0xffffff);
@@ -46,7 +47,7 @@ const ModelViewer = () => {
     directionalLight2.position.set(-100, 200, -100);
     scene.add(directionalLight2);
 
-    camera.position.z = 5;
+    camera.position.z = 500;
 
     const handleResize = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
@@ -61,7 +62,9 @@ const ModelViewer = () => {
       renderer.render(scene, camera);
     };
 
-    animate();
+    if(modelLoaded) {
+      animate();
+    }
 
     window.addEventListener("resize", handleResize);
 
@@ -71,7 +74,7 @@ const ModelViewer = () => {
     };
   }, []);
 
-  return <div ref={mountRef} style={{ width: '100%', height: '100vh' }} />;
+  return <div ref={mountRef} className="w-1.5" />;
 };
 
 export default ModelViewer;
