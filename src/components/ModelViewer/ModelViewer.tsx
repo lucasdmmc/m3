@@ -12,9 +12,6 @@ const ModelViewer = () => {
       "https://raw.githubusercontent.com/dwqdaiwenqi/react-3d-viewer/master/site/src/lib/model/DamagedHelmet.gltf";
 
     const scene = new THREE.Scene();
-    if(scene === null) {
-      return scene;
-    }
     const camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
@@ -23,17 +20,18 @@ const ModelViewer = () => {
     );
 
     const renderer = new THREE.WebGLRenderer();
-    renderer.setClearColor(0xffffff); // Define o fundo como branco
+    renderer.setClearColor(0xffffff);
     renderer.setSize(1200, 1200 * (window.innerHeight / window.innerWidth));
     mountRef.current.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableZoom = false; // Desabilita o zoom
+    controls.enableZoom = false;
 
     const loader = new GLTFLoader();
     loader.load(modelPath, (gltf) => {
-      const model = gltf.scene
-      model.scale.set(0.3, 0.3, 0.3);
+      const model = gltf.scene;
+      const scale = window.innerWidth < 640 ? 0.3 : 1;
+      model.scale.set(scale, scale, scale);
       scene.add(model);
     });
 
@@ -49,6 +47,34 @@ const ModelViewer = () => {
     scene.add(directionalLight2);
 
     camera.position.z = 5;
+
+    const handleResize = () => {
+      renderer.setSize(1200, 1200 * (window.innerHeight / window.innerWidth));
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    };
+
+    const animate = () => {
+      if (!isMounted) return;
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      isMounted = false;
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return <div ref={mountRef} />;
+};
+
+export default ModelViewer;
 
     // const handleScroll = (event: { preventDefault: () => void; }) => {
     //   event.preventDefault();
@@ -72,32 +98,14 @@ const ModelViewer = () => {
     //   }
     // };
 
-    const animate = () => {
-      if (!isMounted) return;
-      requestAnimationFrame(animate);
-      controls.update(); // Comentado para desabilitar o controle de zoom
-      renderer.render(scene, camera);
-    };
-
-    animate();
-
-    // window.addEventListener("wheel", handleWheel, { passive: false });
+        // window.addEventListener("wheel", handleWheel, { passive: false });
     // renderer.domElement.addEventListener("wheel", handleScroll, { passive: false });
     // renderer.domElement.addEventListener("touchmove", handleTouchMove, { passive: false });
     // renderer.domElement.addEventListener("touchstart", disableControls);
     // renderer.domElement.addEventListener("touchend", enableControls);
 
-    return () => {
-      isMounted = false;
-      // renderer.domElement.removeEventListener("wheel", handleScroll);
+          // renderer.domElement.removeEventListener("wheel", handleScroll);
       // renderer.domElement.removeEventListener("touchmove", handleTouchMove);
       // renderer.domElement.removeEventListener("touchstart", disableControls);
       // renderer.domElement.removeEventListener("touchend", enableControls);
       // window.removeEventListener("wheel", handleWheel);
-    };
-  }, []);
-
-  return <div ref={mountRef}/>;
-};
-
-export default ModelViewer;
