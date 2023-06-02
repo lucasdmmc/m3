@@ -69,8 +69,8 @@ const ModelViewer = () => {
 
     if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-200"></div>
+      <div className="flex items-center justify-center h-screen w-screen bg-white border-red-500">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-950"></div>
       </div>
     );
   }
