@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const ModelViewer = () => {
+  const mountRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const modelPath = "/scene.gltf";
 
