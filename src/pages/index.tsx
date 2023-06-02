@@ -1,8 +1,7 @@
-import { HeadFC, PageProps } from "gatsby"
 import React from "react"
 import { Home } from "../components/Home";
 
-const IndexPage: React.FC<PageProps> = () => {
+const IndexPage = () => {
   return (
     <>
       <Home />
@@ -12,4 +11,4 @@ const IndexPage: React.FC<PageProps> = () => {
 
 export default IndexPage;
 
-export const Head: HeadFC = () => <title>M3</title>;
+export const Head = () => <title>M3</title>;

@@ -5,9 +5,6 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const ModelViewer = () => {
   const mountRef = useRef(null);
-
-  const [isLoading, setIsLoading] = useState(true)
-
   useEffect(() => {
     const modelPath = "/scene.gltf";
 
@@ -31,7 +28,6 @@ const ModelViewer = () => {
     loader.load(modelPath, (gltf) => {
       const model = gltf.scene;
       scene.add(model);
-      setIsLoading(false);
     });
 
     const ambientLight = new THREE.AmbientLight(0xffffff);
