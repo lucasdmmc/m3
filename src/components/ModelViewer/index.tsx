@@ -5,12 +5,11 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const ModelViewer = () => {
   const mountRef = useRef(null);
+
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
-
-    let isMounted = true;
-
-    const modelPath =
-      "/scene.gltf";
+    const modelPath = "/scene.gltf";
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -32,6 +31,7 @@ const ModelViewer = () => {
     loader.load(modelPath, (gltf) => {
       const model = gltf.scene;
       scene.add(model);
+      setIsLoading(false);
     });
 
     const ambientLight = new THREE.AmbientLight(0xffffff);
@@ -43,7 +43,6 @@ const ModelViewer = () => {
 
     camera.position.z = window.innerWidth < 640 ? 3 : 0.7;
 
-
     const handleResize = () => {
       renderer.setSize(1200, 1200 * (window.innerHeight / window.innerWidth));
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -51,23 +50,22 @@ const ModelViewer = () => {
     };
 
     const animate = () => {
-      if (!isMounted) return;
       requestAnimationFrame(animate);
+
       controls.update();
       renderer.render(scene, camera);
     };
-    
+
     animate();
-    
+
     window.addEventListener("resize", handleResize);
-    
+
     return () => {
-      isMounted = false;
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  return <div ref={mountRef} />
+  return <div ref={mountRef} />;
 };
 
 export default ModelViewer;
