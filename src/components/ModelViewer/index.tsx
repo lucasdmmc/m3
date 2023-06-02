@@ -5,6 +5,8 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const ModelViewer = () => {
   const mountRef = useRef<HTMLDivElement | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  
   useEffect(() => {
     const modelPath = "/scene.gltf";
 
@@ -19,7 +21,10 @@ const ModelViewer = () => {
     const renderer = new THREE.WebGLRenderer();
     renderer.setClearColor(0xffffff);
     renderer.setSize(1200, 1200 * (window.innerHeight / window.innerWidth));
-    mountRef.current.appendChild(renderer.domElement);
+    
+    if (mountRef.current) {
+      mountRef.current.appendChild(renderer.domElement);
+    }
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = false;
@@ -28,6 +33,7 @@ const ModelViewer = () => {
     loader.load(modelPath, (gltf) => {
       const model = gltf.scene;
       scene.add(model);
+      setIsLoading(false)
     });
 
     const ambientLight = new THREE.AmbientLight(0xffffff);
@@ -59,7 +65,15 @@ const ModelViewer = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [isLoading]);
+
+    if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-200"></div>
+      </div>
+    );
+  }
 
   return <div ref={mountRef} />;
 };

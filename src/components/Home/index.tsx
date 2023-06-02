@@ -5,8 +5,6 @@ import m3Footer from "../../images/m3-footer.png"
 import { Envelope } from "phosphor-react"
 
 
-
-
 export const Home = () => {
   return (
     <main className="relative bg-red flex flex-col justify-center items-center max-w-[1200px] mx-auto">
