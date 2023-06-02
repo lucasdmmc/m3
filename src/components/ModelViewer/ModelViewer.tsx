@@ -1,13 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const ModelViewer = () => {
   const mountRef = useRef(null);
-
   useEffect(() => {
+
     let isMounted = true;
+
     const modelPath =
       "/scene.gltf";
 
@@ -55,52 +56,18 @@ const ModelViewer = () => {
       controls.update();
       renderer.render(scene, camera);
     };
-
+    
     animate();
-
+    
     window.addEventListener("resize", handleResize);
-
+    
     return () => {
       isMounted = false;
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  return <div ref={mountRef} />;
+  return <div ref={mountRef} />
 };
 
 export default ModelViewer;
-
-    // const handleScroll = (event: { preventDefault: () => void; }) => {
-    //   event.preventDefault();
-    // };
-
-    // const handleTouchMove = (event: { preventDefault: () => void; }) => {
-    //   event.preventDefault();
-    // };
-
-    // const enableControls = () => {
-    //   controls.enabled = true;
-    // };
-
-    // const disableControls = () => {
-    //   controls.enabled = false;
-    // };
-
-    // const handleWheel = (event: { target: HTMLCanvasElement; stopPropagation: () => void; }) => {
-    //   if (event.target === renderer.domElement) {
-    //     event.stopPropagation();
-    //   }
-    // };
-
-        // window.addEventListener("wheel", handleWheel, { passive: false });
-    // renderer.domElement.addEventListener("wheel", handleScroll, { passive: false });
-    // renderer.domElement.addEventListener("touchmove", handleTouchMove, { passive: false });
-    // renderer.domElement.addEventListener("touchstart", disableControls);
-    // renderer.domElement.addEventListener("touchend", enableControls);
-
-          // renderer.domElement.removeEventListener("wheel", handleScroll);
-      // renderer.domElement.removeEventListener("touchmove", handleTouchMove);
-      // renderer.domElement.removeEventListener("touchstart", disableControls);
-      // renderer.domElement.removeEventListener("touchend", enableControls);
-      // window.removeEventListener("wheel", handleWheel);
